@@ -17,7 +17,10 @@
 ### Prints das Telas
 | Tela de Login | Tela de Cadastro | Validação de Erros |
 | :---: | :---: | :---: |
-| ![Login](prints/login.png) | ![Cadastro](prints/cadastro.png) | ![Validação](prints/validacao.png) |
+| <img width="938" height="786" alt="image" src="https://github.com/user-attachments/assets/a83bd707-a2fe-4521-acd2-2199a73ed5c4" />
+ |<img width="940" height="790" alt="image" src="https://github.com/user-attachments/assets/7c25475c-1c9c-4569-b8a4-b23370ee5682" />
+| <img width="940" height="787" alt="image" src="https://github.com/user-attachments/assets/bead2509-5205-45d9-b1e5-166bbbb06031" />
+ |
 
 ### Vídeo de Apresentação
 🔗 [Assistir ao vídeo da Etapa 1 no YouTube](https://youtu.be/SEU_LINK_AQUI)
