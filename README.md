@@ -23,7 +23,7 @@
  |
 
 ### Vídeo de Apresentação
-🔗 [Assistir ao vídeo da Etapa 1 no YouTube](https://youtu.be/SEU_LINK_AQUI)
+🔗 [Assistir ao vídeo da Etapa 1 no YouTube](https://youtu.be/FNEiWZ_jmEw)
 
 ### Declaração de Uso de IA
 - **Usamos IA nesta etapa?** Sim (Gemini).
