@@ -1,6 +1,7 @@
 ﻿import 'package:flutter/material.dart';
 import 'login_page.dart';
 import 'cadastro_page.dart';
+import 'home_page.dart';
 
 void main() {
   runApp(const MeuApp());
@@ -12,7 +13,7 @@ class MeuApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Trabalho 0310 - Firebase Auth Model',
+      title: 'Trabalho 0310 - Etapa 2',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
@@ -22,6 +23,7 @@ class MeuApp extends StatelessWidget {
       routes: {
         '/login': (context) => const LoginPage(),
         '/cadastro': (context) => const CadastroPage(),
+        '/home': (context) => const HomePage(),
       },
     );
   }
