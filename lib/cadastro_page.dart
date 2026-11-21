@@ -1,5 +1,7 @@
+
 dart
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CadastroPage extends StatefulWidget {
   const CadastroPage({super.key});
@@ -11,18 +13,27 @@ class CadastroPage extends StatefulWidget {
 class _CadastroPageState extends State<CadastroPage> {
   final _formKey = GlobalKey<FormState>();
 
-  // Campos baseados no modelo User / createUserWithEmailAndPassword do Firebase Auth
   final _nomeController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
   bool _ocultarSenha = true;
 
-  void _fazerCadastro() {
+  Future<void> _fazerCadastro() async {
     if (_formKey.currentState!.validate()) {
+      final prefs = await SharedPreferences.getInstance();
+
+      // Sobrescreve os dados do cadastro anterior nas mesmas chaves locais
+      await prefs.setString('user_displayName', _nomeController.text.trim());
+      await prefs.setString('user_email', _emailController.text.trim());
+      await prefs.setString('user_password', _passwordController.text);
+
+      if (!mounted) return;
+
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Utilizador ${_nomeController.text} cadastrado com sucesso!'),
+          content: Text(
+              'Usuário ${_nomeController.text.trim()} salvo localmente com sucesso!'),
           backgroundColor: Colors.indigo,
         ),
       );
@@ -43,7 +54,7 @@ class _CadastroPageState extends State<CadastroPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Cadastro de Utilizador'),
+        title: const Text('Cadastro de Usuário'),
         centerTitle: true,
       ),
       body: Center(
@@ -54,7 +65,8 @@ class _CadastroPageState extends State<CadastroPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const Icon(Icons.person_add_alt_1_outlined, size: 72, color: Colors.indigo),
+                const Icon(Icons.person_add_alt_1_outlined,
+                    size: 72, color: Colors.indigo),
                 const SizedBox(height: 16),
                 const Text(
                   'Criar Nova Conta',
@@ -62,8 +74,6 @@ class _CadastroPageState extends State<CadastroPage> {
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 24),
-
-                // Nome de Exibição (displayName no Firebase Auth)
                 TextFormField(
                   controller: _nomeController,
                   decoration: const InputDecoration(
@@ -79,8 +89,6 @@ class _CadastroPageState extends State<CadastroPage> {
                   },
                 ),
                 const SizedBox(height: 16),
-
-                // E-mail (email no Firebase Auth)
                 TextFormField(
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
@@ -100,8 +108,6 @@ class _CadastroPageState extends State<CadastroPage> {
                   },
                 ),
                 const SizedBox(height: 16),
-
-                // Senha (password no Firebase Auth - mín. 6 caracteres)
                 TextFormField(
                   controller: _passwordController,
                   obscureText: _ocultarSenha,
@@ -110,7 +116,9 @@ class _CadastroPageState extends State<CadastroPage> {
                     prefixIcon: const Icon(Icons.lock_outline),
                     border: const OutlineInputBorder(),
                     suffixIcon: IconButton(
-                      icon: Icon(_ocultarSenha ? Icons.visibility : Icons.visibility_off),
+                      icon: Icon(_ocultarSenha
+                          ? Icons.visibility
+                          : Icons.visibility_off),
                       onPressed: () {
                         setState(() {
                           _ocultarSenha = !_ocultarSenha;
@@ -120,7 +128,7 @@ class _CadastroPageState extends State<CadastroPage> {
                   ),
                   validator: (valor) {
                     if (valor == null || valor.isEmpty) {
-                      return 'Crie uma palavra-passe';
+                      return 'Crie uma senha';
                     }
                     if (valor.length < 6) {
                       return 'O Firebase Auth exige no mínimo 6 caracteres';
@@ -129,8 +137,6 @@ class _CadastroPageState extends State<CadastroPage> {
                   },
                 ),
                 const SizedBox(height: 16),
-
-                // Confirmar Palavra-passe
                 TextFormField(
                   controller: _confirmPasswordController,
                   obscureText: _ocultarSenha,
@@ -147,8 +153,6 @@ class _CadastroPageState extends State<CadastroPage> {
                   },
                 ),
                 const SizedBox(height: 24),
-
-                // Botão Cadastrar
                 FilledButton(
                   onPressed: _fazerCadastro,
                   style: FilledButton.styleFrom(
@@ -157,8 +161,6 @@ class _CadastroPageState extends State<CadastroPage> {
                   child: const Text('Cadastrar', style: TextStyle(fontSize: 16)),
                 ),
                 const SizedBox(height: 12),
-
-                // Voltar ao Login
                 TextButton(
                   onPressed: () {
                     Navigator.pop(context);
@@ -173,3 +175,4 @@ class _CadastroPageState extends State<CadastroPage> {
     );
   }
 }
+
