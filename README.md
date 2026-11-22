@@ -55,7 +55,7 @@
 
 
 ### Vídeo de Apresentação (Etapa 2)
-🔗 [Assistir ao vídeo da Etapa 2 no YouTube](vamos publicar ainda rs)
+🔗 (https://youtu.be/_OgPEvSPon0)
 
 ### Declaração de Uso de IA (Etapa 2)
 - **Usamos IA nesta etapa?** Sim (Gemini).
